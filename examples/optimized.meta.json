@@ -1,0 +1,41 @@
+{
+  "source_mask": "examples/mask.png",
+  "output_svg": "examples/optimized.svg",
+  "parameters": {
+    "TOL": 4.0,
+    "LINE_TOL": 1.8,
+    "SMOOTH_SIGMA": 7.0,
+    "corner_scales": [
+      [
+        8.0,
+        45.0
+      ],
+      [
+        16.0,
+        55.0
+      ],
+      [
+        32.0,
+        75.0
+      ]
+    ],
+    "corner_nms_radius": 12,
+    "thinning_epsilon": 0.2,
+    "min_contour_area": 600.0,
+    "reparam_iterations": 4,
+    "max_depth": 40,
+    "min_run": 8,
+    "run_sigma_factor": 6.0,
+    "junction_snap": 80.0
+  },
+  "stats": {
+    "contours": 3,
+    "corners": 12,
+    "line_segments": 19,
+    "cubic_segments": 8,
+    "viewbox": [
+      1125,
+      1056
+    ]
+  }
+}

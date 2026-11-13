@@ -1,0 +1,17 @@
+{
+  "detailed": {
+    "TOL": 1.5,
+    "LINE_TOL": 1.2,
+    "SMOOTH_SIGMA": 4.0
+  },
+  "balanced": {
+    "TOL": 4.0,
+    "LINE_TOL": 1.8,
+    "SMOOTH_SIGMA": 7.0
+  },
+  "compact": {
+    "TOL": 11.0,
+    "LINE_TOL": 2.5,
+    "SMOOTH_SIGMA": 10.0
+  }
+}

@@ -83,11 +83,15 @@ The already-fitted vector is available at `examples/optimized.svg`.
 
 Run `tracetune COMMAND --help` for every option. The CLI is also available as `python -m tracetune`.
 
+![CLI output and generated-file overview](docs/assets/cli-output.png)
+
+See [complete captured stdout for every command](docs/cli-output.md), including version, prepare, optimize, presets, inspect, fit, diff, wireframe, sweep, and zoom.
+
 ## Easy optimization and element lookup
 
 `--quality` is the terminal equivalent of a single optimization slider: **0** produces the most compact preset, **65** is balanced, and **100** retains the most detail. Intermediate values interpolate smoothly between the presets.
 
-![Animated comparison of detailed, balanced, and compact optimization](docs/assets/optimization.gif)
+![24 fps comparison of 51 real quality levels with renders, pixel diffs, sizes, and segment counts](docs/assets/optimization.gif)
 
 ```sh
 tracetune optimize mask.png logo.svg                  # balanced, no options needed
@@ -122,7 +126,13 @@ Start with the defaults, then increase `--tol` and `--sigma` for a smaller SVG. 
 
 Diff images use **green** for matching foreground, **red** for mask pixels missing from the SVG, and **blue** for extra SVG pixels. The reported disagreement percentage is relative to mask foreground area.
 
+![24 fps geometry animation showing anchors, Bézier controls, lines, cubics, and SVG size across 51 quality levels](docs/assets/geometry.gif)
+
+The geometry view makes the simplification trade-off visible: lower quality generally uses fewer anchors and curves, while higher quality preserves more contour detail.
+
 ## Parameter sweeps
+
+![Visual guide to defining candidates, evaluating them, comparing metrics, zooming, and selecting an SVG](docs/assets/sweep-guide.png)
 
 A sweep specification is a JSON object mapping unique candidate names to fit parameters:
 
@@ -145,8 +155,8 @@ Each candidate produces an SVG, metadata, full-resolution render, preview, and d
 Compare a detail at full resolution:
 
 ```sh
-tracetune zoom outputs/candidates outputs/crown-zoom.png \
-  850 0 500 500 detailed compact --scale 2
+tracetune zoom outputs/candidates outputs/detail-zoom.png \
+  500 0 500 500 detailed compact --scale 2
 ```
 
 Sweep parameters accept the original uppercase names shown above or their Python field names: `tol`, `line_tol`, `smooth_sigma`, `corner_scales`, `nms_radius`, `thin_eps`, `min_area`, `reparam_iters`, `max_depth`, `min_run`, `run_sigma_factor`, and `junction_snap`. Every candidate starts from the defaults; values never leak from the preceding candidate.
@@ -175,14 +185,14 @@ Unmodified [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-them
 - [Messages](examples/papirus/dialog-messages.svg)
 - [Draw star](examples/papirus/draw-star.svg)
 
-The example mask, optimized SVG, documentation pictures, and GIF are derived from these system icons. See [Papirus attribution and licensing](examples/papirus/README.md).
+The example mask, optimized SVG, documentation pictures, and GIFs are derived from these system icons. See [Papirus attribution and licensing](examples/papirus/README.md).
 
 ## Repository layout
 
 ```text
 src/tracetune/   Installable library and CLI
 examples/           Papirus icons, reusable mask, fitted SVG, and sweep specification
-docs/assets/        README pictures and animated optimization comparison
+docs/               Complete CLI stdout, pictures, sweep guide, and 24 fps GIFs
 .agents/skills/     Project-local skills for extraction and SVG optimization
 outputs/            Local generated files (ignored by Git)
 pyproject.toml      Package metadata and dependencies
